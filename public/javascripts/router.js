@@ -10,7 +10,6 @@ var router = {
 		this.cacheCallback(callback);
 		this.routingToHome(); //load home page on first load
 		this.bindEvents();
-		var x = "Im here";
 	},
 	cacheDom: function() {
 		this.$content = $(".content");
@@ -31,7 +30,6 @@ var router = {
 		this.refreshContentContainer("home");
 		this.resetPlugins();
 		this.getData("/api/movies", "movies");
-		var x = "Im here";
 	},
 	routingToUser : function() {
 		this.refreshContentContainer("user");

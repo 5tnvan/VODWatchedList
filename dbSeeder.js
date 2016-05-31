@@ -171,9 +171,9 @@ exports.seed = function (db) {
       })
       
       var m14 = Movie({
-        id: "a-clockwork-orange",
-        title: "A Clockwork Orange",
-        description: "In future Britain, charismatic delinquent Alex DeLarge is jailed and volunteers for an experimental aversion therapy developed by the government in an effort to solve society's crime problem - but not all goes according to plan.",
+        id: "a-nightmare-on-elm-street-2010",
+        title: "A Nightmare on Elm Street",
+        description: "A re-imagining of the horror icon Freddy Krueger, a serial-killer who wields a glove with four blades embedded in the fingers and kills people in their dreams, resulting in their real death in reality.",
         content: {
           videoUrl: "http://d2bqeap5aduv6p.cloudfront.net/project_coderush_640x360_521kbs_56min.mp4",
           imageUrl: "14.jpg",
