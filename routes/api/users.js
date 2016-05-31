@@ -47,4 +47,16 @@ router.put('/:username/watchedMovies', function (req, res, next) {
 
 });
 
+//DELETE: api/user/:username/watchedMovies
+router.delete('/:username/watchedMovies', function (req, res, next) {
+  User.update(
+    { username: req.params.username},
+    { $set: { 'watchedMovies': [] }},
+    function(err, user) {
+      if (err) res.send(err);
+      res.json(user);
+    });
+});
+
+
 module.exports = router;

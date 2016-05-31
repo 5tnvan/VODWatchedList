@@ -6,7 +6,7 @@ router.get('/', function(req, res, next) {
   res.send('/api');
 });
 
-router.use('/user', require('./user'));
+router.use('/users', require('./users'));
 router.use('/movies', require('./movies'));
 
 module.exports = router;

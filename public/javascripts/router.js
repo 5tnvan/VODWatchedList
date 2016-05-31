@@ -19,8 +19,13 @@ var router = {
 		this.callback = callback;
 	},
 	bindEvents: function() {
+		var that = this;
 		this.$routes.home.on("click", this.routingToHome.bind(this));
 		this.$routes.user.on("click", this.routingToUser.bind(this));
+		this.$content.on("click", ".delete", function() {
+			that.deleteData("/api/users/johndoe/watchedMovies");
+			that.routingToUser();
+		});
 	},
 	routingToHome : function() {
 		this.refreshContentContainer("home");
@@ -32,12 +37,13 @@ var router = {
 		this.refreshContentContainer("user");
 		this.resetPlugins();
 		this.printUserProfile();
-		this.getData("/api/user/johndoe", "history");
+		this.getData("/api/users/johndoe", "history");
 	},
 	getData : function (url, htmlType) {		
 		$.ajax({
+			type : "GET",
 			url: url,
-			dataType: 'json',
+			dataType: "json",
 			context: this,
 			success: function (response) {
 				if (response) {
@@ -48,6 +54,15 @@ var router = {
 					}
 				}
 			},
+			error: function (response) { console.log("Error:" + response); }
+		});
+	},
+	deleteData : function(url) {
+		$.ajax({
+			type : "DELETE",
+			url: url,
+			dataType: "json",
+			success: function (response) { console.log("History cleared"); },
 			error: function (response) { console.log("Error:" + response); }
 		});
 	},
@@ -77,6 +92,14 @@ var router = {
 		var $h2 = $('<h2 />', { text: "Watched Movies" }).appendTo($content);
 		var $scroll = $('<div />', { class : "static" }).appendTo($content);
 		var $moviesContainer = $('<ul />', { class : "items movies" }).appendTo($scroll);
+		
+		if(response.watchedMovies.length == 0) {
+			var $info = $('<span />', { class: "empty", text: "No movies watched." }).appendTo($moviesContainer);
+			return;
+		}
+		
+		var $delete = $('<a />', { href : "javascript:void(0)", text: "Delete history", class: "delete b-white" });
+		$h2.after($delete);
 		
 		for (var i = 0; i < response.watchedMovies.length; i++) {			
 			var time = Date.parse(response.watchedMovies[i].time);

@@ -63,7 +63,7 @@ var videoPlayer = {
 		}		
 		$.ajax({
 			type: "PUT",
-			url: "/api/user/" + username + "/watchedMovies",
+			url: "/api/users/" + username + "/watchedMovies",
 			dataType: 'json',
 			data: data,
 			success: function (response) { console.log("Success: Watched movie saved"); },
